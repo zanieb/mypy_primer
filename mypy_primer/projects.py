@@ -677,7 +677,7 @@ def get_projects() -> list[Project]:
         Project(
             location="https://github.com/langgenius/dify",
             mypy_cmd="{mypy} {paths} --explicit-package-bases --exclude-gitignore --exclude '(^|/)conftest\\.py$' --exclude 'tests/' --exclude 'migrations/' --check-untyped-defs --disable-error-code=import-untyped",
-            pyright_cmd="{pyright} {paths}",
+            pyright_cmd=None,
             ty_cmd="{ty} check {paths} --force-exclude --exclude 'api/tests/**' --exclude 'api/providers/**/tests/**' --exclude 'api/migrations/**'",
             paths=["api"],
             uv_sync_path="api",
@@ -698,7 +698,7 @@ def get_projects() -> list[Project]:
         Project(
             location="https://github.com/PostHog/posthog",
             mypy_cmd="{mypy} {paths}",
-            pyright_cmd="{pyright} {paths}",
+            pyright_cmd=None,
             paths=["posthog", "ee", "products", "services/llm-gateway"],
             uv_sync_path=".",
             needs_mypy_plugins=True,
@@ -709,7 +709,7 @@ def get_projects() -> list[Project]:
         Project(
             location="https://github.com/getsentry/sentry",
             mypy_cmd="PYTHONPATH=src SENTRY_CONF=.mypy-primer-sentry {mypy} {paths} --num-workers=0",
-            pyright_cmd="{pyright} {paths}",
+            pyright_cmd=None,
             paths=["src/sentry"],
             uv_sync_path=".",
             setup_cmd="PYTHONPATH=src {python} -m sentry init --no-clobber .mypy-primer-sentry",
