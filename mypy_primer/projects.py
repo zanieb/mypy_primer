@@ -676,7 +676,7 @@ def get_projects() -> list[Project]:
         ),
         Project(
             location="https://github.com/langgenius/dify",
-            mypy_cmd="{mypy} {paths} --exclude-gitignore --exclude '(^|/)conftest\\.py$' --exclude 'tests/' --exclude 'migrations/' --check-untyped-defs --disable-error-code=import-untyped",
+            mypy_cmd="{mypy} {paths} --explicit-package-bases --exclude-gitignore --exclude '(^|/)conftest\\.py$' --exclude 'tests/' --exclude 'migrations/' --check-untyped-defs --disable-error-code=import-untyped",
             pyright_cmd="{pyright} {paths}",
             ty_cmd="{ty} check {paths} --force-exclude --exclude 'api/tests/**' --exclude 'api/providers/**/tests/**' --exclude 'api/migrations/**'",
             paths=["api"],
@@ -687,7 +687,7 @@ def get_projects() -> list[Project]:
         ),
         Project(
             location="https://github.com/NVIDIA/SkillSpector",
-            mypy_cmd="{mypy} {paths}",
+            mypy_cmd="{mypy} {paths} --explicit-package-bases --exclude 'tests-pro/'",
             pyright_cmd="{pyright} {paths}",
             paths=["src/skillspector", "contrib/batch_scan"],
             install_cmd="{install} '.[mcp]'",
