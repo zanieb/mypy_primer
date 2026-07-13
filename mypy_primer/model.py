@@ -44,7 +44,9 @@ class Project:
     cost: dict[str, int] = field(default_factory=dict)
 
     revision: str | None = None
-    min_python_version: tuple[int, int] | None = None
+    min_python_version: tuple[int, ...] | None = None
+    # Exclusive upper bound.
+    max_python_version: tuple[int, ...] | None = None
     supported_platforms: list[str] | None = None
 
     def __post_init__(self) -> None:
@@ -82,6 +84,8 @@ class Project:
             result += f", revision={self.revision!r}"
         if self.min_python_version:
             result += f", min_python_version={self.min_python_version!r}"
+        if self.max_python_version:
+            result += f", max_python_version={self.max_python_version!r}"
         if self.supported_platforms:
             result += f", supported_platforms={self.supported_platforms!r}"
         result += ")"

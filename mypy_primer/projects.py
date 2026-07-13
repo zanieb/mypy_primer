@@ -683,6 +683,7 @@ def get_projects() -> list[Project]:
             uv_sync_path="api",
             cost={"ty": 2},
             min_python_version=(3, 12),
+            max_python_version=(3, 13),
             supported_platforms=["linux"],
         ),
         Project(
@@ -693,6 +694,7 @@ def get_projects() -> list[Project]:
             install_cmd="{install} '.[mcp]'",
             cost={"ty": 1},
             min_python_version=(3, 12),
+            max_python_version=(3, 15),
             supported_platforms=["linux"],
         ),
         Project(
@@ -703,7 +705,8 @@ def get_projects() -> list[Project]:
             uv_sync_path=".",
             needs_mypy_plugins=True,
             cost={"ty": 11},
-            min_python_version=(3, 13),
+            min_python_version=(3, 13, 13),
+            max_python_version=(3, 13, 14),
             supported_platforms=["linux"],
         ),
         Project(
