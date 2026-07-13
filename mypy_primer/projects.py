@@ -713,7 +713,7 @@ def get_projects() -> list[Project]:
             paths=["src/sentry"],
             uv_sync_path=".",
             needs_mypy_plugins=True,
-            cost={"ty": 13},
+            cost={"ty": 3},
             min_python_version=(3, 13),
             supported_platforms=["linux", "darwin"],
         ),
