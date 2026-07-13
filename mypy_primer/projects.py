@@ -708,10 +708,11 @@ def get_projects() -> list[Project]:
         ),
         Project(
             location="https://github.com/getsentry/sentry",
-            mypy_cmd="{mypy} {paths}",
+            mypy_cmd="PYTHONPATH=src SENTRY_CONF=.mypy-primer-sentry {mypy} {paths} --num-workers=0",
             pyright_cmd="{pyright} {paths}",
             paths=["src/sentry"],
             uv_sync_path=".",
+            setup_cmd="PYTHONPATH=src {python} -m sentry init --no-clobber .mypy-primer-sentry",
             needs_mypy_plugins=True,
             cost={"ty": 3},
             min_python_version=(3, 13),
