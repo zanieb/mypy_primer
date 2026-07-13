@@ -34,6 +34,7 @@ class Project:
     install_cmd: str | None = None
     deps: list[str] | None = None
     uv_sync_path: str | None = None
+    setup_cmd: str | None = None
     needs_mypy_plugins: bool = False
 
     # if expected_success, there is a recent version of type checker which passes cleanly
@@ -55,6 +56,8 @@ class Project:
         if self.uv_sync_path is not None:
             assert self.install_cmd is None
             assert self.deps is None
+        if self.setup_cmd is not None:
+            assert "{python}" in self.setup_cmd
 
     # custom __repr__ that omits defaults.
     def __repr__(self) -> str:
@@ -74,6 +77,8 @@ class Project:
             result += f", deps={self.deps!r}"
         if self.uv_sync_path is not None:
             result += f", uv_sync_path={self.uv_sync_path!r}"
+        if self.setup_cmd:
+            result += f", setup_cmd={self.setup_cmd!r}"
         if self.needs_mypy_plugins:
             result += f", needs_mypy_plugins={self.needs_mypy_plugins!r}"
         if self.expected_success:
@@ -185,6 +190,16 @@ class Project:
                 if e.stderr:
                     print(e.stderr)
                 raise RuntimeError(f"dependency install failed for {self.name}") from e
+        if self.setup_cmd:
+            setup_cmd = self.setup_cmd.format(python=quote_path(self.venv.python))
+            try:
+                await run(setup_cmd, shell=True, cwd=repo_dir, output=True)
+            except subprocess.CalledProcessError as e:
+                if e.output:
+                    print(e.output)
+                if e.stderr:
+                    print(e.stderr)
+                raise RuntimeError(f"project setup failed for {self.name}") from e
 
     def get_mypy_cmd(self, mypy: str | Path, additional_flags: Sequence[str] = ()) -> str:
         mypy_cmd = self.mypy_cmd
