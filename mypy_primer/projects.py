@@ -684,7 +684,6 @@ def get_projects() -> list[Project]:
             cost={"ty": 2},
             min_python_version=(3, 12),
             max_python_version=(3, 13),
-            supported_platforms=["linux"],
         ),
         Project(
             location="https://github.com/NVIDIA/SkillSpector",
@@ -695,7 +694,6 @@ def get_projects() -> list[Project]:
             cost={"ty": 1},
             min_python_version=(3, 12),
             max_python_version=(3, 15),
-            supported_platforms=["linux"],
         ),
         Project(
             location="https://github.com/PostHog/posthog",
@@ -707,7 +705,6 @@ def get_projects() -> list[Project]:
             cost={"ty": 11},
             min_python_version=(3, 13, 13),
             max_python_version=(3, 13, 14),
-            supported_platforms=["linux"],
         ),
         Project(
             location="https://github.com/getsentry/sentry",
@@ -718,7 +715,7 @@ def get_projects() -> list[Project]:
             needs_mypy_plugins=True,
             cost={"ty": 13},
             min_python_version=(3, 13),
-            supported_platforms=["linux"],
+            supported_platforms=["linux", "darwin"],
         ),
         Project(
             location="https://github.com/encode/starlette",
